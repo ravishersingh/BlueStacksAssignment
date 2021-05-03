@@ -19,13 +19,17 @@ public class weatherTest {
         print("Supported Chrome Browser version - 90.0.4430.93.");
     }
 
+    public static void print(String txt) {
+        System.out.println(txt);
+    }
+
     @BeforeMethod
     protected void setUp() {
         citiesToSearch.add("Noida");
         System.out.println("Input Data:" + citiesToSearch);
     }
 
-    @Test
+    @Test (description = "Validate temperatures from web ui and api")
     public void testSearchResults() throws WebDriverNotSetException {
         for (String searchValue : citiesToSearch) {
             String expectedTemp = WeatherHelper.getTemperature_api(searchValue); // Get_Expected_Data (API)
@@ -34,7 +38,7 @@ public class weatherTest {
         }
     }
 
-    @Test
+    @Test(description = "Validate temperatures with variance value range")
     public void testSearchResultsByVariance() throws WebDriverNotSetException {
         int varianceTolerance = 3;
         for (String searchValue : citiesToSearch) {
@@ -45,8 +49,10 @@ public class weatherTest {
         }
     }
 
-    public static void print(String txt) {
-        System.out.println(txt);
+    @Test(enabled=false, description = "Validate temperatures with variance value range")
+    public void testApp(){
+
     }
+
 
 }
